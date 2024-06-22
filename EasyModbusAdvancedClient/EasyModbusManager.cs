@@ -23,13 +23,9 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.ComponentModel;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using System.Linq;
 using System.Xml;
-using EasyModbus;
 
 namespace EasyModbusAdvancedClient
 {
@@ -122,7 +118,7 @@ namespace EasyModbusAdvancedClient
         public void GetValues(ConnectionProperties connectionProperties, int functionPropertyID)
         {
 
-            modbusClient = connectionProperties.modbusClient;          
+            modbusClient = connectionProperties.modbusClient;
             if (!modbusClient.Connected)
             {
                 modbusClient.IPAddress = connectionProperties.ModbusTCPAddress;
@@ -228,7 +224,7 @@ namespace EasyModbusAdvancedClient
             return values;
         }
 
-        public FunctionProperties FindPropertyFromGrid( int gridRow)
+        public FunctionProperties FindPropertyFromGrid(int gridRow)
         {
             foreach (ConnectionProperties connection in connectionPropertiesList)
             {
@@ -254,14 +250,14 @@ namespace EasyModbusAdvancedClient
             */
 
             int startingAddress = prop.StartingAdress;
-            switch(prop.FunctionCodeWrite)
+            switch (prop.FunctionCodeWrite)
             {
                 case FunctionCodeWr.WriteHoldingRegisters:
-                                            prop.Connection.modbusClient.WriteMultipleRegisters(startingAddress, values);
-                                            break;
+                    prop.Connection.modbusClient.WriteMultipleRegisters(startingAddress, values);
+                    break;
 
             }
-            
+
 
         }
 
@@ -437,11 +433,11 @@ namespace EasyModbusAdvancedClient
             foreach (XmlNode xmlNode in xmlNodeList)
             {
                 dataGridView.Rows.Add();
-                if  (xmlNode["columnConnection"] != null)
+                if (xmlNode["columnConnection"] != null)
                     dataGridView[0, dataGridView.Rows.Count - 1].Value = xmlNode["columnConnection"].InnerText;
                 dataGridView.ClearSelection();
                 dataGridView.CurrentCell = null;
-                
+
                 if (xmlNode["columnAddress"] != null)
                     dataGridView[1, dataGridView.Rows.Count - 1].Value = xmlNode["columnAddress"].InnerText;
                 if (dataGridViewChanged != null)
@@ -458,15 +454,15 @@ namespace EasyModbusAdvancedClient
             dataGridView.AllowUserToAddRows = true;
         }
     }
-	
-	
-	public enum FunctionCodeRd : int
-	{
-		ReadCoils = 1,
-		ReadDiscreteInputs = 2,
-		ReadHoldingRegisters = 3,
-		ReadInputRegisters = 4,
-	};
+
+
+    public enum FunctionCodeRd : int
+    {
+        ReadCoils = 1,
+        ReadDiscreteInputs = 2,
+        ReadHoldingRegisters = 3,
+        ReadInputRegisters = 4,
+    };
 
     public enum FunctionCodeWr : int
     {
@@ -479,18 +475,18 @@ namespace EasyModbusAdvancedClient
 
 
     public class FunctionProperties
-	{
-	
-		FunctionCodeRd functionCodeRd = FunctionCodeRd.ReadCoils;
-        [Browsable(true)]                       
-   		[Category("Function code properties")] 
-    	[Description("Function Code Read")]           
-   		[DisplayName("Function Code Read")]     
-		public FunctionCodeRd FunctionCodeRead
-		{
-			get {return functionCodeRd; }
-			set { functionCodeRd = value;}
-		}
+    {
+
+        FunctionCodeRd functionCodeRd = FunctionCodeRd.ReadCoils;
+        [Browsable(true)]
+        [Category("Function code properties")]
+        [Description("Function Code Read")]
+        [DisplayName("Function Code Read")]
+        public FunctionCodeRd FunctionCodeRead
+        {
+            get { return functionCodeRd; }
+            set { functionCodeRd = value; }
+        }
 
         FunctionCodeWr functionCodeWr = FunctionCodeWr.WriteNone;
         [Browsable(true)]
@@ -504,27 +500,27 @@ namespace EasyModbusAdvancedClient
         }
 
         int startingAdress = 0;
-		[Browsable(true)]                       
-   		[Category("Function code properties")] 
-    	[Description("Starting Address")]           
-   		[DisplayName("Starting Address")]  
-		public int StartingAdress
-		{
-			get {return startingAdress;}
-			set {startingAdress = value;}
-		}
-		
+        [Browsable(true)]
+        [Category("Function code properties")]
+        [Description("Starting Address")]
+        [DisplayName("Starting Address")]
+        public int StartingAdress
+        {
+            get { return startingAdress; }
+            set { startingAdress = value; }
+        }
 
-		int quantity = 1;
-		[Browsable(true)]                       
-   		[Category("Function code properties")] 
-    	[Description("Quantity")]           
-   		[DisplayName("Quantity")]    
-		public int Quantity
-		{
-			get {return quantity;}
-			set {quantity = value;}
-		}
+
+        int quantity = 1;
+        [Browsable(true)]
+        [Category("Function code properties")]
+        [Description("Quantity")]
+        [DisplayName("Quantity")]
+        public int Quantity
+        {
+            get { return quantity; }
+            set { quantity = value; }
+        }
 
         int DataGridRowIdx = -1;
         [Browsable(false)]
@@ -537,7 +533,7 @@ namespace EasyModbusAdvancedClient
             set { DataGridRowIdx = value; }
         }
 
-        ConnectionProperties connection= null;
+        ConnectionProperties connection = null;
         [Browsable(false)]
         [Category("Function code properties")]
         [Description("connection")]
@@ -549,5 +545,5 @@ namespace EasyModbusAdvancedClient
         }
 
         public object values;
-}
+    }
 }

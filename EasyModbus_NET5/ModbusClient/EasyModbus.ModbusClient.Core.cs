@@ -22,12 +22,8 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE
 OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.Sockets;
 using System.IO.Ports;
+using System.Net.Sockets;
 
 
 
@@ -37,7 +33,7 @@ namespace EasyModbus
 {
 
     public partial class ModbusClient
-    { 
+    {
 
 
         #region Class Variables
@@ -207,7 +203,7 @@ namespace EasyModbus
 
                 }
 
-                
+
 
                 readBuffer = new byte[256];
                 DateTime dateTimeSend = DateTime.UtcNow;
@@ -220,7 +216,7 @@ namespace EasyModbus
                         System.Threading.Thread.Sleep(1);
                     data = new byte[255];
                     Array.Copy(readBuffer, 0, data, 6, readBuffer.Length);
-                 
+
                 }
                 if (response.UnitIdentifier != unitIdentifier)
                     data = new byte[255];
@@ -321,7 +317,7 @@ namespace EasyModbus
             return response.RegisterDataBool;
         }
 
- 
+
 
 
     }

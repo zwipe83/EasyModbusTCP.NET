@@ -23,8 +23,6 @@ OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace EasyModbus
 {
@@ -33,7 +31,7 @@ namespace EasyModbus
     /// </summary>
     public sealed class StoreLogData
     {
-    	private String filename = null;
+        private String filename = null;
         private static volatile StoreLogData instance;
         private static object syncObject = new Object();
 
@@ -101,20 +99,20 @@ namespace EasyModbus
 
             }
         }
-        
+
         /// <summary>
         /// Gets or Sets the Filename to Store Strings in a File
         /// </summary>
-		public string Filename
-		{
-			get
-			{
-				return filename;
-			}
-			set
-			{
-				filename = value;
-			}
-		}
+        public string Filename
+        {
+            get
+            {
+                return filename;
+            }
+            set
+            {
+                filename = value;
+            }
+        }
     }
 }

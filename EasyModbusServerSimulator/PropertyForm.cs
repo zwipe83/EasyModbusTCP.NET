@@ -1,14 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace EasyModbusServerSimulator
 {
-    
+
     public partial class PropertyForm : Form
     {
         public delegate void settingsChangedEvent();
@@ -36,7 +31,7 @@ namespace EasyModbusServerSimulator
 
         private void btnAccept_Click(object sender, EventArgs e)
         {
-           
+
             if (SettingsChangedEvent != null)
                 SettingsChangedEvent();
             this.Close();

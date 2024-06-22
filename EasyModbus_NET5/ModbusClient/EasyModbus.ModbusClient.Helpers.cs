@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EasyModbus
 {
@@ -100,7 +96,7 @@ namespace EasyModbus
                                 };
             return BitConverter.ToSingle(floatBytes, 0);
         }
-       
+
 
         /// <summary>
         /// Converts two ModbusRegisters to Float, Registers can by swapped
@@ -157,7 +153,7 @@ namespace EasyModbus
         /// </summary>
         /// <param name="registers">four Register values received from Modbus</param>
         /// <returns>64 bit value</returns>
-    
+
         public static Int64 ConvertRegistersToLong(int[] registers)
         {
             if (registers.Length != 4)

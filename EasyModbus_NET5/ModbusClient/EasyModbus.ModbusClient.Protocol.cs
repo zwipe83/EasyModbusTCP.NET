@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EasyModbus
 {
@@ -50,7 +47,7 @@ namespace EasyModbus
                             BitConverter.GetBytes((ushort)StartingAddressRead)[0],
                             BitConverter.GetBytes((ushort)QuantityRead)[1],
                             BitConverter.GetBytes((ushort)QuantityRead)[0],
-                            
+
                            };
                         break;
                     // FC02 (0x02) "Read Discrete Inputs" Page 12
@@ -73,7 +70,8 @@ namespace EasyModbus
                 switch (FunctionCode)
                 {
                     // FC 01: Read Coils and 02 Read Discrete Inputs provide the same response
-                    case 1: case 2:
+                    case 1:
+                    case 2:
                         byte byteCount = value[1];
                         RegisterDataBool = new bool[QuantityRead];
                         for (int i = 0; i < QuantityRead; i++)
@@ -108,10 +106,10 @@ namespace EasyModbus
     /// </summary>
     class ApplicationDataUnit : ProtocolDataUnit
     {
-        
+
         public ushort TransactionIdentifier { get; set; }
         private ushort protocolIdentifier = 0;
-        
+
         public byte UnitIdentifier { get; set; }
         /// <summary>
         /// Constructor, the Function code has to be handed over at instantiation
@@ -154,7 +152,8 @@ namespace EasyModbus
 
 
 
-       public byte[] Payload {
+        public byte[] Payload
+        {
             // Return the Payload in case of a request
             get
             {
@@ -164,14 +163,14 @@ namespace EasyModbus
                 returnvalue.Add(FunctionCode);
                 returnvalue.AddRange(Data);
 
-                byte [] crc = BitConverter.GetBytes(ModbusClient.calculateCRC(returnvalue.ToArray(), (ushort)(returnvalue.Count - 8), 6));
+                byte[] crc = BitConverter.GetBytes(ModbusClient.calculateCRC(returnvalue.ToArray(), (ushort)(returnvalue.Count - 8), 6));
                 returnvalue.AddRange(crc);
                 return returnvalue.ToArray();
             }
             // Set the Payload in case of a resonse
-            set 
+            set
             {
-                
+
                 TransactionIdentifier = BitConverter.ToUInt16(value, 0);
                 UnitIdentifier = value[6];
 
@@ -186,4 +185,4 @@ namespace EasyModbus
 
 
 
-    }
+}
